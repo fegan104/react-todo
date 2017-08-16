@@ -1,12 +1,15 @@
-import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MyAwesomeComponent from './MyAwesomeComponent.js';
-import AppBar from 'material-ui/AppBar';
-import MoreVert from 'material-ui/svg-icons/navigation/more-vert';
-import { white } from 'material-ui/styles/colors';
+import React from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import AppBar from 'material-ui/AppBar'
+import MoreVert from 'material-ui/svg-icons/navigation/more-vert'
+import { white } from 'material-ui/styles/colors'
 import IconButton from 'material-ui/IconButton'
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import Home from './Home/Home.js'
+import Canada from './Canada/Canada.js'
+import UnitedStates from './UnitedStates/UnitedStates.js'
+import {Switch, Route} from 'react-router-dom'
 
 const iconStyles = {
   margin: 8,
@@ -56,7 +59,11 @@ const Content = () => {
   }
   return (
     <div style={style}>
-      <MyAwesomeComponent />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/canada' component={Canada} />
+        <Route path='/united-states' component={UnitedStates} />
+      </Switch>
     </div>
   )
 }
