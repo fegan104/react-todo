@@ -9,7 +9,7 @@ import MenuItem from 'material-ui/MenuItem'
 import Home from './Home/Home.js'
 import Canada from './Canada/Canada.js'
 import UnitedStates from './UnitedStates/UnitedStates.js'
-import {Switch, Route} from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 
 const iconStyles = {
   margin: 8,
@@ -42,8 +42,18 @@ class App extends React.Component {
             width={200}
             open={this.state.open}
             onRequestChange={(open) => this.setState({ open })}>
-            <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
-            <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
+
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/">Home</Link>
+            </MenuItem>
+
+            <MenuItem onClick={this.handleClose}>
+              <Link style={{width: "100%"}} to="/canada">Canada</Link>
+            </MenuItem>
+
+            <MenuItem onClick={this.handleClose}>
+              <Link to="/united-states">United States</Link>
+            </MenuItem>
           </Drawer>
           <Content />
 
