@@ -23,7 +23,6 @@ export const todos = (state = [], action) => {
 export const filter = (state = 'ALL', action) => {
   switch (action.type) {
     case 'SET_FILTER':
-      console.log(action)
       return action.filter
     default:
       return state

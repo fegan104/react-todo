@@ -19,6 +19,13 @@ class AddTodo extends React.Component {
     });
   };
 
+  handleAdd = (e) => {
+    this.props.dispatch(addTodo(this.state.value))
+    this.setState({
+      value: "",
+    });
+  }
+
   render() {
     return (
       <div>
@@ -27,7 +34,7 @@ class AddTodo extends React.Component {
           onChange={this.handleChange} />
         <RaisedButton style={{ marginLeft: 16 }}
           label="Add"
-          onClick={e => this.props.dispatch(addTodo(this.state.value))} />
+          onClick={e => this.handleAdd(e)} />
       </div>
     )
   }
