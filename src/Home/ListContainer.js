@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { List, ListItem } from 'material-ui/List'
 import { toggleTodo } from './HomeActionCreators.js'
+import Checkbox from 'material-ui/Checkbox';
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
@@ -20,25 +21,29 @@ const mapStateToProps = (state) => ({
   todos: getVisibleTodos(state.todos, state.filter)
 })
 
-const mapDispatchToProps = {
-  onTodoClick: toggleTodo
+const mapDispatchToProps = dispatch => {
+  return {
+    onTodoClick: id => {
+      dispatch(toggleTodo(id))
+    }
+  }
 }
 
-const TodoList = (todos) => {
-  if (todos.todos.length === 0)
-    return (<div>Add Todos</div>)
+const TodoList = ({todos, onTodoClick}) => (
+  <List>
+    {todos.map(todo => (
+      <ListItem
+        style={{ fontFamily: "Roboto" }}
+        key={todo.id}
+        primaryText={todo.text}
+        leftCheckbox={<Checkbox
+          checked={todo.completed}
+          onClick={() => onTodoClick(todo.id)} />
+        } />
+    ))}
+  </List>
+)
 
-  return (
-    <List>
-      {console.log(todos)}
-      {todos.todos.map(todo => (
-        <ListItem key={todo.id}
-          primaryText={todo.text}
-          onClick={e => toggleTodo(todo.id)} />
-      ))}
-    </List>
-  )
-}
 
 const ListContainer = connect(
   mapStateToProps,

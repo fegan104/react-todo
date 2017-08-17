@@ -69,7 +69,6 @@ class FilterButton extends React.Component {
             <RadioButton
               value="ACTIVE"
               label="Active"
-              onClick
               style={styles.radioButton} />
             <RadioButton
               value="COMPLETED"
