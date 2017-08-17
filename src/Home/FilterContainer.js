@@ -13,21 +13,24 @@ const styles = {
   },
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  active: ownProps.filter === state.visibilityFilter
-})
+const mapStateToProps = (state) => ({ state })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: () => {
-    dispatch(setFilter(ownProps.filter))
+const mapDispatchToProps = (dispatch) => ({
+  onClick: newFilter => {
+    dispatch(setFilter(newFilter))
   }
 })
 
 
 class FilterButton extends React.Component {
-  state = {
-    open: false,
-  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      valueSelected: "ALL"
+    }
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -35,6 +38,17 @@ class FilterButton extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false });
+  };
+
+  onFilter = () => {
+    this.handleClose()
+    this.props.onClick(this.state.valueSelected)
+  }
+
+  handleChange = (newFilter) => {
+    this.setState({
+      valueSelected: newFilter,
+    });
   };
 
   render() {
@@ -46,7 +60,7 @@ class FilterButton extends React.Component {
       <FlatButton
         label="Filter"
         primary={true}
-        onClick={this.handleClose} />,
+        onClick={this.onFilter} />,
     ];
     return (
       <div>
@@ -61,7 +75,7 @@ class FilterButton extends React.Component {
           modal={false}
           open={this.state.open}
           onRequestClose={this.handleClose}>
-          <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
+          <RadioButtonGroup name="filterGroup" onChange={e => this.handleChange(e.target.value)} defaultSelected={this.state.valueSelected}>
             <RadioButton
               value="ALL"
               label="All"

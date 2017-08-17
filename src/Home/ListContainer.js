@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const TodoList = ({todos, onTodoClick}) => (
+const TodoList = ({ todos, onTodoClick }) => (
   <List>
     {todos.map(todo => (
       <ListItem
