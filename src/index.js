@@ -5,8 +5,30 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './rootReducer.js'
 import { BrowserRouter } from 'react-router-dom'
+import { compose } from 'redux'
+import { reactReduxFirebase } from 'react-redux-firebase'
 
-const store = createStore(reducer)
+// Firebase config
+const firebaseConfig = {
+  apiKey: 'AIzaSyAGxrHtVDQ_JMVs90nplXMexjatuB1m5Ts',
+  authDomain: 'react-todo-90261.firebaseapp.com',
+  databaseURL: 'https://react-todo-90261.firebaseio.com/',
+  storageBucket: 'gs://react-todo-90261.appspot.com/'
+}
+// react-redux-firebase options
+const config = {
+  userProfile: 'users', // firebase root where user profiles are stored
+  enableLogging: false, // enable/disable Firebase's database logging
+}
+
+// Add redux Firebase to compose
+const createStoreWithFirebase = compose(
+  reactReduxFirebase(firebaseConfig, config)
+)(createStore)
+
+// Create store with reducers and initial state
+const initialState = {}
+const store = createStoreWithFirebase(reducer, initialState)
 
 ReactDOM.render((
   <Provider store={store}>
