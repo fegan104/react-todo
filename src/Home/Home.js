@@ -1,5 +1,5 @@
 import React from 'react'
-import ListContainer from './ListContainer.js'
+import TodoList from './TodoList.js'
 import FilterContainer from './FilterContainer'
 import AddTodo from './AddTodo.js'
 
@@ -14,7 +14,7 @@ const Home = () => (
   <div style={style}>
     <div>
       <AddTodo />
-      <ListContainer />
+      <TodoList />
     </div>
     <FilterContainer />
   </div>

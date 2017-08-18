@@ -4,13 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux'
 import { addTodo } from './HomeActionCreators.js'
 import { compose } from 'redux'
-import {
-  firebaseConnect,
-  isLoaded,
-  isEmpty,
-  dataToJS,
-  pathToJS
-} from 'react-redux-firebase'
+import { firebaseConnect, dataToJS } from 'react-redux-firebase'
 
 class AddTodo extends React.Component {
   constructor(props) {
@@ -28,15 +22,14 @@ class AddTodo extends React.Component {
   };
 
   handleAdd = () => {
-    this.props.firebase
-      .push('/todos', { text: this.state.value, completed: false })
-      .then(() => {
-        this.props.dispatch(addTodo(this.state.value))
-        this.setState({
-          value: "",
-        });
-        console.log('Todo pushed to FB!')
-      })
+    let pushRef = this.props.firebase.push('/todos', { text: this.state.value, completed: false });
+    let pushId = pushRef.key
+    pushRef.then(() => {
+      this.props.dispatch(addTodo(this.state.value, pushId))
+      this.setState({
+        value: "",
+      });
+    })
       .catch((err) => {
         console.log('Error creating todo:', err) // error is also set to authError
       })
@@ -58,7 +51,7 @@ class AddTodo extends React.Component {
 
 export default compose(
   firebaseConnect([
-    'todos' // { path: 'todos' } // object notation
+    'todos'
   ]),
   connect(
     ({ firebase }) => ({ // state.firebase
