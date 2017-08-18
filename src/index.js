@@ -34,7 +34,6 @@ let initialState = new Object()
 Firebase.database().ref('/todos').once('value').then(function (snapshot) {
   initialState.todos = Object.keys(snapshot.val()).map(key => {
     let data = snapshot.val()[key]
-    // console.log(val[key])
     return {
       id: key,
       completed: data.completed,
@@ -42,7 +41,6 @@ Firebase.database().ref('/todos').once('value').then(function (snapshot) {
     }
   })
   initialState.filter = "ALL"
-  console.log(initialState)
   const store = createStoreWithFirebase(reducer, initialState)
 
   ReactDOM.render((
