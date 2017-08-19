@@ -55,7 +55,12 @@ class SignIn extends Component {
     }
 
     return (
-      <p>Welcome!</p>
+      <div>
+        <p>Welcome!</p>
+        <button onClick={e => this.props.firebase.logout()}>
+          LOGOUT
+      </button>
+      </div>
     )
 
   }
@@ -64,8 +69,8 @@ class SignIn extends Component {
 export default compose(
   firebaseConnect(),
   connect(({ firebase }) => ({
-      authError: pathToJS(firebase, 'authError'),
-      auth: pathToJS(firebase, 'auth')
-    })
+    authError: pathToJS(firebase, 'authError'),
+    auth: pathToJS(firebase, 'auth')
+  })
   )
 )(SignIn)
