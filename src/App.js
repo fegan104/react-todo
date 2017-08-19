@@ -8,6 +8,7 @@ import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import Home from './Home/Home.js'
 import Canada from './Canada/Canada.js'
+import SignIn from './SignIn/SignIn.js'
 import UnitedStates from './UnitedStates/UnitedStates.js'
 import { Switch, Route, Link } from 'react-router-dom'
 
@@ -73,6 +74,7 @@ const Content = () => {
         <Route exact path='/' component={Home} />
         <Route path='/canada' component={Canada} />
         <Route path='/united-states' component={UnitedStates} />
+        <Route path='/sign-in' component={SignIn} />
       </Switch>
     </div>
   )
