@@ -64,7 +64,7 @@ class FilterButton extends React.Component {
     ];
     return (
       <div>
-        <FloatingActionButton style={{ margin: 16, position: "absolute", bottom: 0, right: 0 }}
+        <FloatingActionButton style={{ margin: 16, position: "fixed", bottom: 0, right: 0 }}
           onClick={this.handleOpen}>
           <ContentFilter />
         </FloatingActionButton>
